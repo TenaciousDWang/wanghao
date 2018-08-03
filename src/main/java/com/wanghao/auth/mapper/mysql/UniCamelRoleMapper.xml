@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.wanghao.auth.mapper.mysql.UniCamelRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.wanghao.auth.entity.UniCamelRole" >
+    <id column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="ord" property="ord" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_persion" property="createPersion" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_persion" property="updatePersion" jdbcType="VARCHAR" />
+    <result column="soft_phone_bar" property="softPhoneBar" jdbcType="VARCHAR" />
+    <result column="im_list_authority" property="imListAuthority" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    role_id, role_name, memo, ord, create_date, create_persion, update_date, update_persion, 
+    soft_phone_bar, im_list_authority
+  </sql>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wanghao.auth.entity.UniCamelRoleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from uni_camel_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.wanghao.auth.entity.UniCamelRoleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from uni_camel_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.wanghao.auth.entity.UniCamelRoleExample" >
+    delete from uni_camel_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.wanghao.auth.entity.UniCamelRoleExample" resultType="java.lang.Integer" >
+    select count(*) from uni_camel_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update uni_camel_role
+    <set >
+      <if test="record.roleId != null" >
+        role_id = #{record.roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleName != null" >
+        role_name = #{record.roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memo != null" >
+        memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ord != null" >
+        ord = #{record.ord,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createPersion != null" >
+        create_persion = #{record.createPersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatePersion != null" >
+        update_persion = #{record.updatePersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softPhoneBar != null" >
+        soft_phone_bar = #{record.softPhoneBar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imListAuthority != null" >
+        im_list_authority = #{record.imListAuthority,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update uni_camel_role
+    set role_id = #{record.roleId,jdbcType=VARCHAR},
+      role_name = #{record.roleName,jdbcType=VARCHAR},
+      memo = #{record.memo,jdbcType=VARCHAR},
+      ord = #{record.ord,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      create_persion = #{record.createPersion,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      update_persion = #{record.updatePersion,jdbcType=VARCHAR},
+      soft_phone_bar = #{record.softPhoneBar,jdbcType=VARCHAR},
+      im_list_authority = #{record.imListAuthority,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from uni_camel_role
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from uni_camel_role
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wanghao.auth.entity.UniCamelRole" >
+    insert into uni_camel_role (role_id, role_name, memo, 
+      ord, create_date, create_persion, 
+      update_date, update_persion, soft_phone_bar, 
+      im_list_authority)
+    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
+      #{ord,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{createPersion,jdbcType=VARCHAR}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{updatePersion,jdbcType=VARCHAR}, #{softPhoneBar,jdbcType=VARCHAR}, 
+      #{imListAuthority,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wanghao.auth.entity.UniCamelRole" >
+    insert into uni_camel_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      role_id,
+      role_name,
+      memo,
+      ord,
+      create_date,
+      create_persion,
+      update_date,
+      update_persion,
+      soft_phone_bar,
+      im_list_authority,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{roleId,jdbcType=VARCHAR},
+      #{roleName,jdbcType=VARCHAR},
+      #{memo,jdbcType=VARCHAR},
+      #{ord,jdbcType=INTEGER},
+      #{createDate,jdbcType=TIMESTAMP},
+      #{createPersion,jdbcType=VARCHAR},
+      #{updateDate,jdbcType=TIMESTAMP},
+      #{updatePersion,jdbcType=VARCHAR},
+      #{softPhoneBar,jdbcType=VARCHAR},
+      #{imListAuthority,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wanghao.auth.entity.UniCamelRole" >
+    update uni_camel_role
+    <set >
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="ord != null" >
+        ord = #{ord,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPersion != null" >
+        create_persion = #{createPersion,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePersion != null" >
+        update_persion = #{updatePersion,jdbcType=VARCHAR},
+      </if>
+      <if test="softPhoneBar != null" >
+        soft_phone_bar = #{softPhoneBar,jdbcType=VARCHAR},
+      </if>
+      <if test="imListAuthority != null" >
+        im_list_authority = #{imListAuthority,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wanghao.auth.entity.UniCamelRole" >
+    update uni_camel_role
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      ord = #{ord,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_persion = #{createPersion,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_persion = #{updatePersion,jdbcType=VARCHAR},
+      soft_phone_bar = #{softPhoneBar,jdbcType=VARCHAR},
+      im_list_authority = #{imListAuthority,jdbcType=VARCHAR}
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.wanghao.auth.mapper.mysql.UniCamelUserMapper" >
+  <resultMap id="BaseResultMap" type="com.wanghao.auth.entity.UniCamelUser" >
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="login_id" property="loginId" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="id_card" property="idCard" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="emall" property="emall" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="password_date" property="passwordDate" jdbcType="TIMESTAMP" />
+    <result column="user_address" property="userAddress" jdbcType="VARCHAR" />
+    <result column="user_position" property="userPosition" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="lock_date" property="lockDate" jdbcType="TIMESTAMP" />
+    <result column="lock_login_times" property="lockLoginTimes" jdbcType="INTEGER" />
+    <result column="pwd_update_date" property="pwdUpdateDate" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_persion" property="createPersion" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="update_persion" property="updatePersion" jdbcType="VARCHAR" />
+    <result column="skin" property="skin" jdbcType="VARCHAR" />
+    <result column="tel_agent_num" property="telAgentNum" jdbcType="VARCHAR" />
+    <result column="im_agent_num" property="imAgentNum" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, login_id, `password`, user_name, id_card, sex, emall, mobile, telephone, 
+    password_date, user_address, user_position, `state`, memo, lock_date, lock_login_times, 
+    pwd_update_date, create_date, create_persion, update_date, update_persion, skin, 
+    tel_agent_num, im_agent_num
+  </sql>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wanghao.auth.entity.UniCamelUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from uni_camel_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.wanghao.auth.entity.UniCamelUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from uni_camel_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.wanghao.auth.entity.UniCamelUserExample" >
+    delete from uni_camel_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.wanghao.auth.entity.UniCamelUserExample" resultType="java.lang.Integer" >
+    select count(*) from uni_camel_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update uni_camel_user
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginId != null" >
+        login_id = #{record.loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        `password` = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null" >
+        id_card = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emall != null" >
+        emall = #{record.emall,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null" >
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passwordDate != null" >
+        password_date = #{record.passwordDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userAddress != null" >
+        user_address = #{record.userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPosition != null" >
+        user_position = #{record.userPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        `state` = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memo != null" >
+        memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lockDate != null" >
+        lock_date = #{record.lockDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lockLoginTimes != null" >
+        lock_login_times = #{record.lockLoginTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.pwdUpdateDate != null" >
+        pwd_update_date = #{record.pwdUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createPersion != null" >
+        create_persion = #{record.createPersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatePersion != null" >
+        update_persion = #{record.updatePersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skin != null" >
+        skin = #{record.skin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telAgentNum != null" >
+        tel_agent_num = #{record.telAgentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imAgentNum != null" >
+        im_agent_num = #{record.imAgentNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update uni_camel_user
+    set user_id = #{record.userId,jdbcType=VARCHAR},
+      login_id = #{record.loginId,jdbcType=VARCHAR},
+      `password` = #{record.password,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      id_card = #{record.idCard,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      emall = #{record.emall,jdbcType=VARCHAR},
+      mobile = #{record.mobile,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      password_date = #{record.passwordDate,jdbcType=TIMESTAMP},
+      user_address = #{record.userAddress,jdbcType=VARCHAR},
+      user_position = #{record.userPosition,jdbcType=VARCHAR},
+      `state` = #{record.state,jdbcType=VARCHAR},
+      memo = #{record.memo,jdbcType=VARCHAR},
+      lock_date = #{record.lockDate,jdbcType=TIMESTAMP},
+      lock_login_times = #{record.lockLoginTimes,jdbcType=INTEGER},
+      pwd_update_date = #{record.pwdUpdateDate,jdbcType=TIMESTAMP},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      create_persion = #{record.createPersion,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      update_persion = #{record.updatePersion,jdbcType=VARCHAR},
+      skin = #{record.skin,jdbcType=VARCHAR},
+      tel_agent_num = #{record.telAgentNum,jdbcType=VARCHAR},
+      im_agent_num = #{record.imAgentNum,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from uni_camel_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from uni_camel_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wanghao.auth.entity.UniCamelUser" >
+    insert into uni_camel_user (user_id, login_id, `password`, 
+      user_name, id_card, sex, 
+      emall, mobile, telephone, 
+      password_date, user_address, user_position, 
+      `state`, memo, lock_date, 
+      lock_login_times, pwd_update_date, create_date, 
+      create_persion, update_date, update_persion, 
+      skin, tel_agent_num, im_agent_num
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{loginId,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{emall,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{passwordDate,jdbcType=TIMESTAMP}, #{userAddress,jdbcType=VARCHAR}, #{userPosition,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{lockDate,jdbcType=TIMESTAMP}, 
+      #{lockLoginTimes,jdbcType=INTEGER}, #{pwdUpdateDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createPersion,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updatePersion,jdbcType=VARCHAR}, 
+      #{skin,jdbcType=VARCHAR}, #{telAgentNum,jdbcType=VARCHAR}, #{imAgentNum,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wanghao.auth.entity.UniCamelUser" >
+    insert into uni_camel_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      user_id,
+      login_id,
+      `password`,
+      user_name,
+      id_card,
+      sex,
+      emall,
+      mobile,
+      telephone,
+      password_date,
+      user_address,
+      user_position,
+      `state`,
+      memo,
+      lock_date,
+      lock_login_times,
+      pwd_update_date,
+      create_date,
+      create_persion,
+      update_date,
+      update_persion,
+      skin,
+      tel_agent_num,
+      im_agent_num,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{userId,jdbcType=VARCHAR},
+      #{loginId,jdbcType=VARCHAR},
+      #{password,jdbcType=VARCHAR},
+      #{userName,jdbcType=VARCHAR},
+      #{idCard,jdbcType=VARCHAR},
+      #{sex,jdbcType=VARCHAR},
+      #{emall,jdbcType=VARCHAR},
+      #{mobile,jdbcType=VARCHAR},
+      #{telephone,jdbcType=VARCHAR},
+      #{passwordDate,jdbcType=TIMESTAMP},
+      #{userAddress,jdbcType=VARCHAR},
+      #{userPosition,jdbcType=VARCHAR},
+      #{state,jdbcType=VARCHAR},
+      #{memo,jdbcType=VARCHAR},
+      #{lockDate,jdbcType=TIMESTAMP},
+      #{lockLoginTimes,jdbcType=INTEGER},
+      #{pwdUpdateDate,jdbcType=TIMESTAMP},
+      #{createDate,jdbcType=TIMESTAMP},
+      #{createPersion,jdbcType=VARCHAR},
+      #{updateDate,jdbcType=TIMESTAMP},
+      #{updatePersion,jdbcType=VARCHAR},
+      #{skin,jdbcType=VARCHAR},
+      #{telAgentNum,jdbcType=VARCHAR},
+      #{imAgentNum,jdbcType=VARCHAR},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wanghao.auth.entity.UniCamelUser" >
+    update uni_camel_user
+    <set >
+      <if test="loginId != null" >
+        login_id = #{loginId,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null" >
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="emall != null" >
+        emall = #{emall,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="passwordDate != null" >
+        password_date = #{passwordDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userAddress != null" >
+        user_address = #{userAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userPosition != null" >
+        user_position = #{userPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        `state` = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="lockDate != null" >
+        lock_date = #{lockDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lockLoginTimes != null" >
+        lock_login_times = #{lockLoginTimes,jdbcType=INTEGER},
+      </if>
+      <if test="pwdUpdateDate != null" >
+        pwd_update_date = #{pwdUpdateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPersion != null" >
+        create_persion = #{createPersion,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePersion != null" >
+        update_persion = #{updatePersion,jdbcType=VARCHAR},
+      </if>
+      <if test="skin != null" >
+        skin = #{skin,jdbcType=VARCHAR},
+      </if>
+      <if test="telAgentNum != null" >
+        tel_agent_num = #{telAgentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="imAgentNum != null" >
+        im_agent_num = #{imAgentNum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wanghao.auth.entity.UniCamelUser" >
+    update uni_camel_user
+    set login_id = #{loginId,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      emall = #{emall,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      password_date = #{passwordDate,jdbcType=TIMESTAMP},
+      user_address = #{userAddress,jdbcType=VARCHAR},
+      user_position = #{userPosition,jdbcType=VARCHAR},
+      `state` = #{state,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      lock_date = #{lockDate,jdbcType=TIMESTAMP},
+      lock_login_times = #{lockLoginTimes,jdbcType=INTEGER},
+      pwd_update_date = #{pwdUpdateDate,jdbcType=TIMESTAMP},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_persion = #{createPersion,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      update_persion = #{updatePersion,jdbcType=VARCHAR},
+      skin = #{skin,jdbcType=VARCHAR},
+      tel_agent_num = #{telAgentNum,jdbcType=VARCHAR},
+      im_agent_num = #{imAgentNum,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.wanghao.auth.mapper.mysql.UniCamelResourcesMapper" >
+  <resultMap id="BaseResultMap" type="com.wanghao.auth.entity.UniCamelResources" >
+    <id column="resources_id" property="resourcesId" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="app_system_id" property="appSystemId" jdbcType="VARCHAR" />
+    <result column="resources_type" property="resourcesType" jdbcType="VARCHAR" />
+    <result column="open_type" property="openType" jdbcType="VARCHAR" />
+    <result column="resources_name" property="resourcesName" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="resources_icon" property="resourcesIcon" jdbcType="VARCHAR" />
+    <result column="ext1" property="ext1" jdbcType="VARCHAR" />
+    <result column="ext2" property="ext2" jdbcType="VARCHAR" />
+    <result column="ext3" property="ext3" jdbcType="VARCHAR" />
+    <result column="ext4" property="ext4" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="ord" property="ord" jdbcType="INTEGER" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="create_persion" property="createPersion" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_persion" property="updatePersion" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    resources_id, parent_id, app_system_id, resources_type, open_type, resources_name, 
+    url, resources_icon, ext1, ext2, ext3, ext4, memo, ord, `path`, create_persion, create_date, 
+    update_persion, update_date
+  </sql>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wanghao.auth.entity.UniCamelResourcesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from uni_camel_resources
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="com.wanghao.auth.entity.UniCamelResourcesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from uni_camel_resources
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.wanghao.auth.entity.UniCamelResourcesExample" >
+    delete from uni_camel_resources
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.wanghao.auth.entity.UniCamelResourcesExample" resultType="java.lang.Integer" >
+    select count(*) from uni_camel_resources
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update uni_camel_resources
+    <set >
+      <if test="record.resourcesId != null" >
+        resources_id = #{record.resourcesId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appSystemId != null" >
+        app_system_id = #{record.appSystemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourcesType != null" >
+        resources_type = #{record.resourcesType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openType != null" >
+        open_type = #{record.openType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourcesName != null" >
+        resources_name = #{record.resourcesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourcesIcon != null" >
+        resources_icon = #{record.resourcesIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext1 != null" >
+        ext1 = #{record.ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext2 != null" >
+        ext2 = #{record.ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext3 != null" >
+        ext3 = #{record.ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ext4 != null" >
+        ext4 = #{record.ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memo != null" >
+        memo = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ord != null" >
+        ord = #{record.ord,jdbcType=INTEGER},
+      </if>
+      <if test="record.path != null" >
+        `path` = #{record.path,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createPersion != null" >
+        create_persion = #{record.createPersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatePersion != null" >
+        update_persion = #{record.updatePersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update uni_camel_resources
+    set resources_id = #{record.resourcesId,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=VARCHAR},
+      app_system_id = #{record.appSystemId,jdbcType=VARCHAR},
+      resources_type = #{record.resourcesType,jdbcType=VARCHAR},
+      open_type = #{record.openType,jdbcType=VARCHAR},
+      resources_name = #{record.resourcesName,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      resources_icon = #{record.resourcesIcon,jdbcType=VARCHAR},
+      ext1 = #{record.ext1,jdbcType=VARCHAR},
+      ext2 = #{record.ext2,jdbcType=VARCHAR},
+      ext3 = #{record.ext3,jdbcType=VARCHAR},
+      ext4 = #{record.ext4,jdbcType=VARCHAR},
+      memo = #{record.memo,jdbcType=VARCHAR},
+      ord = #{record.ord,jdbcType=INTEGER},
+      `path` = #{record.path,jdbcType=VARCHAR},
+      create_persion = #{record.createPersion,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_persion = #{record.updatePersion,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from uni_camel_resources
+    where resources_id = #{resourcesId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from uni_camel_resources
+    where resources_id = #{resourcesId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.wanghao.auth.entity.UniCamelResources" >
+    insert into uni_camel_resources (resources_id, parent_id, app_system_id, 
+      resources_type, open_type, resources_name, 
+      url, resources_icon, ext1, 
+      ext2, ext3, ext4, memo, 
+      ord, `path`, create_persion, 
+      create_date, update_persion, update_date
+      )
+    values (#{resourcesId,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{appSystemId,jdbcType=VARCHAR}, 
+      #{resourcesType,jdbcType=VARCHAR}, #{openType,jdbcType=VARCHAR}, #{resourcesName,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{resourcesIcon,jdbcType=VARCHAR}, #{ext1,jdbcType=VARCHAR}, 
+      #{ext2,jdbcType=VARCHAR}, #{ext3,jdbcType=VARCHAR}, #{ext4,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
+      #{ord,jdbcType=INTEGER}, #{path,jdbcType=VARCHAR}, #{createPersion,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updatePersion,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wanghao.auth.entity.UniCamelResources" >
+    insert into uni_camel_resources
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      resources_id,
+      parent_id,
+      app_system_id,
+      resources_type,
+      open_type,
+      resources_name,
+      url,
+      resources_icon,
+      ext1,
+      ext2,
+      ext3,
+      ext4,
+      memo,
+      ord,
+      `path`,
+      create_persion,
+      create_date,
+      update_persion,
+      update_date,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{resourcesId,jdbcType=VARCHAR},
+      #{parentId,jdbcType=VARCHAR},
+      #{appSystemId,jdbcType=VARCHAR},
+      #{resourcesType,jdbcType=VARCHAR},
+      #{openType,jdbcType=VARCHAR},
+      #{resourcesName,jdbcType=VARCHAR},
+      #{url,jdbcType=VARCHAR},
+      #{resourcesIcon,jdbcType=VARCHAR},
+      #{ext1,jdbcType=VARCHAR},
+      #{ext2,jdbcType=VARCHAR},
+      #{ext3,jdbcType=VARCHAR},
+      #{ext4,jdbcType=VARCHAR},
+      #{memo,jdbcType=VARCHAR},
+      #{ord,jdbcType=INTEGER},
+      #{path,jdbcType=VARCHAR},
+      #{createPersion,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP},
+      #{updatePersion,jdbcType=VARCHAR},
+      #{updateDate,jdbcType=TIMESTAMP},
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wanghao.auth.entity.UniCamelResources" >
+    update uni_camel_resources
+    <set >
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="appSystemId != null" >
+        app_system_id = #{appSystemId,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcesType != null" >
+        resources_type = #{resourcesType,jdbcType=VARCHAR},
+      </if>
+      <if test="openType != null" >
+        open_type = #{openType,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcesName != null" >
+        resources_name = #{resourcesName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcesIcon != null" >
+        resources_icon = #{resourcesIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="ext1 != null" >
+        ext1 = #{ext1,jdbcType=VARCHAR},
+      </if>
+      <if test="ext2 != null" >
+        ext2 = #{ext2,jdbcType=VARCHAR},
+      </if>
+      <if test="ext3 != null" >
+        ext3 = #{ext3,jdbcType=VARCHAR},
+      </if>
+      <if test="ext4 != null" >
+        ext4 = #{ext4,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="ord != null" >
+        ord = #{ord,jdbcType=INTEGER},
+      </if>
+      <if test="path != null" >
+        `path` = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="createPersion != null" >
+        create_persion = #{createPersion,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePersion != null" >
+        update_persion = #{updatePersion,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where resources_id = #{resourcesId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wanghao.auth.entity.UniCamelResources" >
+    update uni_camel_resources
+    set parent_id = #{parentId,jdbcType=VARCHAR},
+      app_system_id = #{appSystemId,jdbcType=VARCHAR},
+      resources_type = #{resourcesType,jdbcType=VARCHAR},
+      open_type = #{openType,jdbcType=VARCHAR},
+      resources_name = #{resourcesName,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      resources_icon = #{resourcesIcon,jdbcType=VARCHAR},
+      ext1 = #{ext1,jdbcType=VARCHAR},
+      ext2 = #{ext2,jdbcType=VARCHAR},
+      ext3 = #{ext3,jdbcType=VARCHAR},
+      ext4 = #{ext4,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      ord = #{ord,jdbcType=INTEGER},
+      `path` = #{path,jdbcType=VARCHAR},
+      create_persion = #{createPersion,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_persion = #{updatePersion,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where resources_id = #{resourcesId,jdbcType=VARCHAR}
+  </update>
+</mapper>
