@@ -9,11 +9,20 @@
 		WHERE t.user_id = #{userId,jdbcType=VARCHAR}
 	</select>
 	<select id="getUserResourcesNameList" resultType="java.util.Map" parameterType="java.util.Map" >
-		select e.resources_name as resourcesName from uni_camel_user_role t 
+		select 
+		e.resources_name as resourcesName,
+		e.url as resourcesUrl		
+		from uni_camel_user_role t 
 		LEFT JOIN 
 		uni_camel_role_auth b ON t.role_id = b.role_id
 		LEFT JOIN 
 		uni_camel_resources e ON b.resources_id = e.resources_id
 		WHERE t.user_id = #{userId,jdbcType=VARCHAR}
+	</select>	
+	<select id="getAllResourcesList" resultType="java.util.Map">
+		select 
+		t.resources_name as resourcesName,
+		t.url as resourcesUrl		
+		from uni_camel_resources t 
 	</select>	
 </mapper>
