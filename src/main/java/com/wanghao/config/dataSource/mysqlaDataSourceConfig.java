@@ -76,6 +76,7 @@ public class mysqlaDataSourceConfig {
     @Value("${customer.datasource.ds1.useGlobalDataSourceStat}")
     private boolean useGlobalDataSourceStat;
     
+    
     @Bean(name = "mysqlaDatasource",destroyMethod = "close",initMethod = "init")
     public DataSource mysqlaDataSource() {
         DruidDataSource datasource = new DruidDataSource();  
