@@ -9,8 +9,6 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
@@ -75,7 +73,10 @@ public class mysqlaDataSourceConfig {
     @Value("{customer.datasource.ds1.connectionProperties}")  
     private String connectionProperties; 
     
-    @Bean(name = "mysqlaDatasource")
+    @Value("${customer.datasource.ds1.useGlobalDataSourceStat}")
+    private boolean useGlobalDataSourceStat;
+    
+    @Bean(name = "mysqlaDatasource",destroyMethod = "close",initMethod = "init")
     public DataSource mysqlaDataSource() {
         DruidDataSource datasource = new DruidDataSource();  
 
@@ -97,6 +98,7 @@ public class mysqlaDataSourceConfig {
         datasource.setTestOnReturn(testOnReturn);  
         datasource.setPoolPreparedStatements(poolPreparedStatements);  
         datasource.setMaxPoolPreparedStatementPerConnectionSize(maxPoolPreparedStatementPerConnectionSize); 
+        datasource.setUseGlobalDataSourceStat(useGlobalDataSourceStat);
         
         try {  
             datasource.setFilters(filters);  
