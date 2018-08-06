@@ -19,7 +19,7 @@ import com.wanghao.auth.service.ShiroService;
 public class ShiroServiceImpl implements ShiroService{
 	
 	@Autowired
-    private UniCamelMapper uniCamelMapper;
+    UniCamelMapper uniCamelMapper;
 
 	@Autowired
 	ShiroFilterFactoryBean shiroFilterFactoryBean;
@@ -33,7 +33,7 @@ public class ShiroServiceImpl implements ShiroService{
 		Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 		List<HashMap<String,Object>> list = uniCamelMapper.getAllResourcesList();
 		for (HashMap<String,Object> map : list) {
-			filterChainDefinitionMap.put(map.get("url")+"","perms["+map.get("url")+"]");
+			filterChainDefinitionMap.put(map.get("resourcesUrl")+"","perms["+map.get("resourcesName")+"]");
 		}
 		filterChainDefinitionMap.put("/static/**", "anon");
 		filterChainDefinitionMap.put("/druid/**", "anon");
@@ -70,10 +70,15 @@ public class ShiroServiceImpl implements ShiroService{
 				String url = entry.getKey();
 				String chainDefinition = entry.getValue().trim()
 						.replace(" ", "");
+				if("".equals(url) || "".equals(chainDefinition)) {
+					continue;
+				}
 				manager.createChain(url, chainDefinition);
 			}
 			System.out.println("更新权限成功！！");
 		}
 	}
+	
+
 	
 }

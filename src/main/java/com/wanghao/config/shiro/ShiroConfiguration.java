@@ -1,5 +1,6 @@
 package com.wanghao.config.shiro;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -9,23 +10,18 @@ import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSource
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
-import com.wanghao.auth.service.ShiroService;
-
 /**
  * shiro配置项
- * Created by Lucare.Feng on 2017/3/6.
+ * Created by wanghao on 2018/8/1.
  */
-@Configuration
+@Configuration 
 public class ShiroConfiguration {
 	
-	@Autowired(required = false)
-	private ShiroService shiroService;
 
     @Bean(name = "lifecycleBeanPostProcessor")
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
@@ -50,6 +46,7 @@ public class ShiroConfiguration {
         realm.setCredentialsMatcher(hashedCredentialsMatcher());
         return realm;
     }
+   
 
     @Bean(name = "ehCacheManager")
     @DependsOn("lifecycleBeanPostProcessor")
@@ -72,7 +69,17 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-        Map<String, String> filterChainDefinitionManager = shiroService.loadFilterChainDefinitions();      
+        Map<String, String> filterChainDefinitionManager = new LinkedHashMap<String, String>();
+        //从数据库获取
+/*        UserService userService = (UserService) SpringContextHolder.getBean("userService");
+    	List<HashMap<String, Object>> list = ShiroFilter();//userService.selectAllPermission();
+    	for (HashMap<String, Object> map : list) {
+    		filterChainDefinitionManager.put(map.get("resourcesUrl")+"","perms["+map.get("resourcesName")+"]");
+    	}*/
+    	filterChainDefinitionManager.put("/static/**", "anon");
+    	filterChainDefinitionManager.put("/druid/**", "anon");
+    	filterChainDefinitionManager.put("/ajaxLogin", "anon");//anon 可以理解为不拦截
+    	filterChainDefinitionManager.put("/**",  "authc");//其他资源全部拦截authc  
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionManager);
 
         shiroFilterFactoryBean.setLoginUrl("/login");
